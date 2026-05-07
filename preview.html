@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ru" data-theme="light" data-accent="orange" data-fontpair="syne" data-motion="on">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Portfolio Preview — tru3ty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        bg: 'var(--bg)', 'bg-2': 'var(--bg-2)',
+        surface: 'var(--surface)', 'surface-2': 'var(--surface-2)',
+        border: 'var(--border)', 'border-strong': 'var(--border-strong)',
+        text: 'var(--text)', 'text-secondary': 'var(--text-secondary)', 'text-muted': 'var(--text-muted)',
+        accent: 'var(--accent)', 'accent-soft': 'var(--accent-soft)',
+        'invert-bg': 'var(--invert-bg)', 'invert-text': 'var(--invert-text)',
+      },
+      fontFamily: {
+        display: ['var(--font-display)'],
+        body: ['var(--font-body)'],
+        mono: ['var(--font-mono)'],
+      },
+    },
+  },
+};
+</script>
+<style>
+  :root, [data-theme="light"] {
+    --bg:#f5f3ee; --bg-2:#edeae3; --surface:#fff; --surface-2:#faf8f3;
+    --border:#d8d4cb; --border-strong:#b8b3a8;
+    --text:#1a1814; --text-secondary:#6b6760; --text-muted:#9a948a;
+    --invert-bg:#1a1814; --invert-text:#f5f3ee;
+  }
+  [data-theme="dark"] {
+    --bg:#100f0d; --bg-2:#1a1814; --surface:#1f1d18; --surface-2:#26241f;
+    --border:#2e2b25; --border-strong:#46423a;
+    --text:#f1ede4; --text-secondary:#9a948a; --text-muted:#6b6760;
+    --invert-bg:#f5f3ee; --invert-text:#1a1814;
+  }
+  [data-accent="orange"]{--accent:#e8622a;--accent-soft:rgba(232,98,42,0.12);}
+  [data-accent="blue"]{--accent:#2d5be3;--accent-soft:rgba(45,91,227,0.14);}
+  [data-accent="violet"]{--accent:#7c4dff;--accent-soft:rgba(124,77,255,0.14);}
+  [data-accent="green"]{--accent:#2ea66b;--accent-soft:rgba(46,166,107,0.14);}
+  [data-accent="pink"]{--accent:#ec4899;--accent-soft:rgba(236,72,153,0.14);}
+
+  [data-fontpair="syne"]{--font-display:"Syne",sans-serif;--font-body:"Syne",sans-serif;--font-mono:"DM Mono",monospace;}
+  [data-fontpair="grotesk"]{--font-display:"Space Grotesk",sans-serif;--font-body:"Space Grotesk",sans-serif;--font-mono:"JetBrains Mono",monospace;}
+  [data-fontpair="serif"]{--font-display:"Instrument Serif",serif;--font-body:"Space Grotesk",sans-serif;--font-mono:"JetBrains Mono",monospace;}
+
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:var(--font-body,var(--font-display));-webkit-font-smoothing:antialiased;overflow-x:hidden;cursor:none;margin:0;}
+  @media(max-width:768px),(pointer:coarse){body{cursor:auto;}}
+  body::before{content:"";position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:.4;mix-blend-mode:multiply;}
+  [data-theme="dark"] body::before{mix-blend-mode:screen;opacity:.25;}
+  ::-webkit-scrollbar{width:6px;height:6px;}
+  ::-webkit-scrollbar-track{background:var(--bg);}
+  ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+  ::selection{background:var(--accent);color:#fff;}
+  [data-motion="off"] *{animation-duration:.001ms!important;transition-duration:.001ms!important;}
+  .font-display{font-family:var(--font-display);}
+  .font-body{font-family:var(--font-body,var(--font-display));}
+  .font-mono{font-family:var(--font-mono);}
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/framer-motion@11.11.17/dist/framer-motion.js"></script>
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.js"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" data-presets="react" src="preview/data.js"></script>
+<script type="text/babel" data-presets="react" src="preview/icons.jsx"></script>
+<script type="text/babel" data-presets="react" src="preview/primitives.jsx"></script>
+<script type="text/babel" data-presets="react" src="preview/sections.jsx"></script>
+<script type="text/babel" data-presets="react" src="preview/app.jsx"></script>
+</body>
+</html>
