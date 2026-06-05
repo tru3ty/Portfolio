@@ -1,3 +1,5 @@
+'use client';
+
 import { useRef, ReactNode, MouseEvent } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { useApp } from '../AppContext';

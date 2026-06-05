@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Settings, X, Sun, Moon, Sparkles, Type } from 'lucide-react';

@@ -1,3 +1,5 @@
+'use client';
+
 type IconProps = { size?: number };
 
 // Возвращает брендовый цвет для градиента на карточке

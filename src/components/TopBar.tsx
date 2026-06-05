@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { Send } from 'lucide-react';
 import { useApp } from '../AppContext';
