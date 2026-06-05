@@ -1,0 +1,17 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: tru3ty-portfolio
+    restart: unless-stopped
+    ports:
+      # Слева — хост-порт (поменяй при конфликте), справа — порт nginx в контейнере.
+      # В Dokploy маппинг можно убрать и завести через его reverse-proxy (Traefik).
+      - "3000:80"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s

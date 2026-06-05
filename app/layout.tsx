@@ -95,19 +95,14 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-// Применяет сохранённые настройки (тема/акцент/шрифт/язык) ДО первой отрисовки,
-// чтобы не было вспышки светлой темы и mismatch при гидрации.
+// Применяет сохранённые тему/язык ДО первой отрисовки, чтобы не было вспышки
+// и mismatch при гидрации. Акцент/шрифт/motion фиксированы в разметке html.
 const themeInitScript = `
 (function () {
   try {
     var d = document.documentElement;
     var ls = localStorage;
-    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var motion = ls.getItem('motion');
-    d.setAttribute('data-theme', ls.getItem('theme') || 'light');
-    d.setAttribute('data-accent', ls.getItem('accent') || 'orange');
-    d.setAttribute('data-fontpair', ls.getItem('fontPair') || 'syne');
-    d.setAttribute('data-motion', (motion ? motion === 'on' : !prefersReduced) ? 'on' : 'off');
+    d.setAttribute('data-theme', ls.getItem('theme') || 'dark');
     d.setAttribute('lang', ls.getItem('lang') || 'ru');
   } catch (e) {}
 })();
@@ -117,9 +112,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="ru"
-      data-theme="light"
+      data-theme="dark"
       data-accent="orange"
-      data-fontpair="syne"
+      data-fontpair="grotesk"
       data-motion="on"
       className={fontVars}
       suppressHydrationWarning

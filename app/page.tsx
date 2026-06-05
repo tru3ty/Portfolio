@@ -10,7 +10,6 @@ import DevOps from '@/components/DevOps';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import CursorBlob from '@/components/CursorBlob';
-import TweaksPanel from '@/components/TweaksPanel';
 
 export default function Home() {
   return (
@@ -28,7 +27,6 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
-      <TweaksPanel />
     </AppProvider>
   );
 }
