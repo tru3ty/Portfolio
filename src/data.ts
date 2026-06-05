@@ -303,6 +303,8 @@ export const STACK: StackCategory[] = [
     items: [
       { name: 'Docker', icon: 'box', description: { ru: 'Контейнеризация', en: 'Containerization' } },
       { name: 'Nginx', icon: 'split', description: { ru: 'Reverse proxy', en: 'Reverse proxy' } },
+      { name: 'Caddy', icon: 'caddy', description: { ru: 'Авто-HTTPS из коробки', en: 'Automatic HTTPS' } },
+      { name: 'Traefik', icon: 'traefik', description: { ru: 'Прокси для контейнеров', en: 'Container-native proxy' } },
       { name: 'GitHub Actions', icon: 'workflow', description: { ru: 'CI/CD пайплайны', en: 'CI/CD pipelines' } },
       { name: 'VPS / Linux', icon: 'terminal', description: { ru: 'Boot, ssh, systemd', en: 'Boot, ssh, systemd' } },
     ],
