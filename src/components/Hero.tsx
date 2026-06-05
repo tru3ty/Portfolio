@@ -1,3 +1,5 @@
+'use client';
+
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { ArrowDown } from 'lucide-react';
@@ -70,7 +72,8 @@ export default function Hero() {
               <div className={ln.accent ? 'flex items-center' : undefined}>
                 <GlitchText
                   text={ln.text}
-                  className={ln.accent ? 'flex italic font-serif' : 'flex'}
+                  ambient
+                  className={ln.accent ? 'italic font-serif' : undefined}
                 />
                 {ln.accent && (
                   <motion.span

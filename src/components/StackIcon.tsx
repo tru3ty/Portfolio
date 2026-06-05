@@ -1,3 +1,5 @@
+'use client';
+
 type IconProps = { size?: number };
 
 // Возвращает брендовый цвет для градиента на карточке
@@ -21,6 +23,8 @@ export const ICON_COLORS: Record<string, string> = {
   box:             '#2496ED', // Docker
   split:           '#009900', // Nginx
   workflow:        '#2088FF', // GitHub Actions
+  caddy:           '#22C09A', // Caddy
+  traefik:         '#24A1C1', // Traefik
   terminal:        '#FCC624', // Linux
   'git-branch':    '#F05032', // Git
   figma:           '#F24E1E', // Figma
@@ -299,6 +303,34 @@ function TldrawIcon({ size = 24 }: IconProps) {
   );
 }
 
+function CaddyIcon({ size = 24 }: IconProps) {
+  // Caddy — щит (HTTPS by default), фирменный зелёный.
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <path d="M12 2.5l7 2.5v6c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V5l7-2.5Z" fill="#22C09A" />
+      <path d="M8.5 12l2.5 2.5 4.5-5" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function TraefikIcon({ size = 24 }: IconProps) {
+  // Traefik — маршрутизация: узел с расходящимися путями.
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <rect width="24" height="24" rx="5" fill="#1B2B4B" />
+      <g stroke="#24A1C1" strokeWidth="1.6" strokeLinecap="round">
+        <path d="M5 12h4" />
+        <path d="M13 7h6M13 12h6M13 17h6" />
+        <path d="M9 12c1.5 0 2.5-5 4-5M9 12c1.5 0 2.5 5 4 5" />
+      </g>
+      <circle cx="9" cy="12" r="2" fill="#FF8C2B" />
+      <circle cx="20" cy="7" r="1.4" fill="#24A1C1" />
+      <circle cx="20" cy="12" r="1.4" fill="#24A1C1" />
+      <circle cx="20" cy="17" r="1.4" fill="#24A1C1" />
+    </svg>
+  );
+}
+
 const map: Record<string, (p: IconProps) => JSX.Element> = {
   react:           ReactIcon,
   next:            NextIcon,
@@ -319,6 +351,8 @@ const map: Record<string, (p: IconProps) => JSX.Element> = {
   box:             DockerIcon,
   split:           NginxIcon,
   workflow:        GithubActionsIcon,
+  caddy:           CaddyIcon,
+  traefik:         TraefikIcon,
   terminal:        LinuxIcon,
   'git-branch':    GitIcon,
   figma:           FigmaIcon,

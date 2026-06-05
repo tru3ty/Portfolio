@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { useApp } from '../AppContext';
 import { t, tr } from '../i18n';

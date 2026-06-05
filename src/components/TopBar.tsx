@@ -1,10 +1,12 @@
+'use client';
+
 import { motion } from 'framer-motion';
-import { Send } from 'lucide-react';
+import { Send, Sun, Moon } from 'lucide-react';
 import { useApp } from '../AppContext';
 import Magnetic from './Magnetic';
 
 export default function TopBar() {
-  const { lang, setLang } = useApp();
+  const { lang, setLang, theme, setTheme } = useApp();
   return (
     <motion.header
       initial={{ y: -30, opacity: 0 }}
@@ -51,6 +53,24 @@ export default function TopBar() {
               }}
             />
           </div>
+
+          {/* Переключатель темы */}
+          <button
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            data-cursor="hover"
+            aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+            className="flex items-center justify-center w-8 h-8 rounded-full border border-border text-text-secondary hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors"
+          >
+            <motion.span
+              key={theme}
+              initial={{ rotate: -90, opacity: 0, scale: 0.6 }}
+              animate={{ rotate: 0, opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="flex"
+            >
+              {theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
+            </motion.span>
+          </button>
 
           <Magnetic
             as="a"

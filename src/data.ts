@@ -1,4 +1,4 @@
-import type { TimelineEvent, Project, StackCategory } from './types';
+import type { TimelineEvent, TimelineYear, Project, StackCategory } from './types';
 
 export const TIMELINE: TimelineEvent[] = [
   {
@@ -12,30 +12,43 @@ export const TIMELINE: TimelineEvent[] = [
     },
     tag: { ru: 'Старт', en: 'Start' },
     kind: 'milestone',
+    role: { ru: 'Старт пути', en: 'Where it started' },
+    note: { ru: 'fullstack', en: 'fullstack' },
+    stack: ['Next.js', 'NestJS', 'TypeScript'],
   },
   {
     id: 'leepy',
-    date: { ru: 'Лето 2024', en: 'Summer 2024' },
-    year: 2024,
-    title: { ru: 'Лендинг Leepy', en: 'Leepy landing' },
+    date: { ru: 'Зима 2024/25', en: 'Winter 2024/25' },
+    year: 2025,
+    title: { ru: 'Leepy', en: 'Leepy' },
     description: {
       ru: 'Сайт для дизайнера на Next.js + Strapi. Первое серьёзное знакомство с Framer Motion и CMS-архитектурой.',
       en: 'Designer landing on Next.js + Strapi. First deep dive into Framer Motion and CMS architecture.',
     },
     tag: { ru: 'Проект', en: 'Project' },
     kind: 'project',
+    status: 'launched',
+    role: { ru: 'Frontend Dev', en: 'Frontend Dev' },
+    note: { ru: 'запущен', en: 'launched' },
+    url: 'https://leepy.ru/',
+    stack: ['Next.js', 'Strapi', 'Framer Motion'],
   },
   {
     id: 'lisavi',
-    date: { ru: 'Осень 2024', en: 'Autumn 2024' },
-    year: 2024,
-    title: { ru: 'Лисави — e-commerce', en: 'Lisavi — e-commerce' },
+    date: { ru: 'Зима 2024/25', en: 'Winter 2024/25' },
+    year: 2025,
+    title: { ru: 'Lisavi.ru', en: 'Lisavi.ru' },
     description: {
       ru: 'Запустил e-commerce с нуля: ЮКасса, Т-Банк, доставка с расчётом, промокоды, кастомная админ-панель. Здесь научился держать в голове всю систему.',
       en: 'Built e-commerce from scratch: ЮKassa, T-Bank, shipping calc, promo codes, custom admin panel. Learned to hold an entire system in my head.',
     },
     tag: { ru: 'Проект', en: 'Project' },
     kind: 'project',
+    status: 'production',
+    role: { ru: 'Fullstack Dev', en: 'Fullstack Dev' },
+    note: { ru: 'в проде', en: 'launched' },
+    url: 'https://lisavi.ru/',
+    stack: ['Next.js', 'NestJS', 'Prisma', 'ЮКасса', 'Т-Банк'],
   },
   {
     id: 'devops-dive',
@@ -48,42 +61,77 @@ export const TIMELINE: TimelineEvent[] = [
     },
     tag: { ru: 'Скилл', en: 'Skill' },
     kind: 'learn',
+    role: { ru: 'Self-taught', en: 'Self-taught' },
+    note: { ru: 'скилл', en: 'skill up' },
+    stack: ['Docker', 'Nginx', 'GitHub Actions', 'VPS'],
   },
   {
     id: 'istok',
     date: { ru: 'Весна 2025', en: 'Spring 2025' },
     year: 2025,
-    title: { ru: 'ИСТОК — платформа МФТИ', en: 'ИСТОК — MIPT platform' },
+    title: { ru: 'ИСТОК @ МФТИ', en: 'ИСТОК @ MIPT' },
     description: {
       ru: 'Языковое тестирование для студентов МФТИ. Реализовал автоматическую проверку через GigaChat с кастомным промптом. На платформе уже больше 10 000 тестов.',
       en: 'Language testing platform for MIPT students. Built auto-grading via GigaChat with a custom system prompt. 10K+ tests on the platform.',
     },
     tag: { ru: 'Проект', en: 'Project' },
     kind: 'project',
+    status: 'production',
+    role: { ru: 'Fullstack Dev', en: 'Fullstack Dev' },
+    note: { ru: 'в проде / 10K+ тестов', en: 'in production / 10K+ tests' },
+    url: 'https://istok-demo.ru/',
+    stack: ['NestJS', 'Next.js', 'GigaChat', 'GigaChain', 'Prisma'],
   },
   {
     id: 'pifagorum',
     date: { ru: 'Лето 2025', en: 'Summer 2025' },
     year: 2025,
-    title: { ru: 'Пифагорум — LMS', en: 'Пифагорум — LMS' },
+    title: { ru: 'Пифагорум', en: 'Пифагорум' },
     description: {
       ru: 'Спроектировал и поднял модуль видеоконференций на LiveKit — от медиасервера до кастомного UI с управлением комнатами и участниками.',
       en: 'Designed and built a video-conference module on LiveKit — from media server to custom UI with room and participant management.',
     },
     tag: { ru: 'Проект', en: 'Project' },
     kind: 'project',
+    status: 'production',
+    role: { ru: 'Fullstack Dev', en: 'Fullstack Dev' },
+    note: { ru: 'в проде', en: 'in production' },
+    url: 'https://vc.pifagorum.qque-dev.ru/',
+    stack: ['NestJS', 'Next.js', 'GraphQL', 'Prisma', 'LiveKit', 'tldraw'],
   },
   {
     id: 'exploo',
     date: { ru: 'Осень 2025', en: 'Autumn 2025' },
     year: 2025,
-    title: { ru: 'Exploo — стартап', en: 'Exploo — startup' },
+    title: { ru: 'Exploo', en: 'Exploo' },
     description: {
-      ru: 'Платформа для репетиторов. Hono + tRPC + TanStack, видеосвязь на LiveKit, авторизация через Better Auth с привязкой Telegram. Здесь рос как архитектор.',
-      en: 'Tutoring platform. Hono + tRPC + TanStack, LiveKit video, Better Auth with Telegram binding. Grew as an architect here.',
+      ru: 'Платформа для репетиторов: интерактивные доски (tldraw), расписание, видеосвязь (LiveKit). Hono + tRPC + TanStack, авторизация через Better Auth с привязкой Telegram. Соло-стартап — рос как архитектор.',
+      en: 'Tutor platform: interactive whiteboards (tldraw), scheduling, video calls (LiveKit). Hono + tRPC + TanStack, Better Auth with Telegram binding. Solo-founded startup — grew as an architect.',
     },
     tag: { ru: 'Стартап', en: 'Startup' },
     kind: 'work',
+    status: 'in-progress',
+    role: { ru: 'Solo Founder', en: 'Solo Founder' },
+    note: { ru: 'MVP / в работе', en: 'MVP / in progress' },
+    url: 'https://exploo.ru',
+    stack: ['React', 'Hono', 'tRPC', 'tldraw', 'LiveKit', 'Better Auth'],
+  },
+  {
+    id: 'lofty',
+    date: { ru: 'Начало 2026', en: 'Early 2026' },
+    year: 2026,
+    title: { ru: 'Lofty', en: 'Lofty' },
+    description: {
+      ru: 'Self-hosted платформа лояльности и учёта для малого бизнеса (кафе, салоны, барбершопы). Уровни с кэшбэком, QR-транзакции, склад, аналитика, white-label — данные на своём сервере, без подписок. Монорепо на Turborepo, бэкенд Hono, фронт Vite + React.',
+      en: 'Self-hosted loyalty & inventory platform for small business (cafés, salons, barbershops). Cashback tiers, QR transactions, warehouse, analytics, white-label — data on your own server, no subscriptions. Turborepo monorepo, Hono backend, Vite + React frontend.',
+    },
+    tag: { ru: 'Проект', en: 'Project' },
+    kind: 'project',
+    status: 'production',
+    role: { ru: 'Fullstack Dev', en: 'Fullstack Dev' },
+    note: { ru: 'в проде', en: 'in production' },
+    url: 'https://self-loyalty.ru',
+    stack: ['Vite + React', 'Hono', 'Prisma', 'Turborepo'],
   },
   {
     id: 'now',
@@ -96,6 +144,38 @@ export const TIMELINE: TimelineEvent[] = [
     },
     tag: { ru: 'Open', en: 'Open' },
     kind: 'milestone',
+    status: 'in-progress',
+    role: { ru: 'Open to work', en: 'Open to work' },
+    note: { ru: 'ищу команду', en: 'looking for a team' },
+    stack: ['Edge Runtime', 'WebRTC', 'tRPC'],
+  },
+];
+
+/** Заголовки годов для timeline: крупная цифра, курсивный подзаголовок, сводка. */
+export const TIMELINE_YEARS: TimelineYear[] = [
+  {
+    year: 2024,
+    subtitle: { ru: 'первый прод, первые шишки', en: 'first prod, first lessons' },
+    summary: {
+      ru: 'Первая строка кода в проде. Next.js и NestJS из пет-проектов переросли в реальные задачи — и я пошёл в фуллстек.',
+      en: 'First line of code in production. Next.js and NestJS grew from pet projects into real work — and I went fullstack.',
+    },
+  },
+  {
+    year: 2025,
+    subtitle: { ru: 'production everywhere, mods for fun', en: 'production everywhere, mods for fun' },
+    summary: {
+      ru: 'Лендинг Leepy и e-commerce Lisavi с нуля, инфраструктура и DevOps, ИСТОК для МФТИ, видеосвязь Пифагорума, MVP стартапа Exploo. Починил заброшенный CS2-мод — 100k+ скачиваний.',
+      en: 'The Leepy landing and Lisavi e-commerce from scratch, infrastructure and DevOps, ИСТОК for MIPT, Pifagorum video, the Exploo MVP push. Fixed an abandoned CS2 mod — 100k+ downloads.',
+    },
+  },
+  {
+    year: 2026,
+    subtitle: { ru: 'shipping & open to work', en: 'shipping & open to work' },
+    summary: {
+      ru: 'Запустил Lofty — self-hosted лояльность и учёт для малого бизнеса. Ищу команду, где можно расти как фуллстек и брать ответственность за архитектуру.',
+      en: 'Shipped Lofty — self-hosted loyalty and inventory for small business. Looking for a team where I can grow as fullstack and own the architecture.',
+    },
   },
 ];
 
@@ -139,7 +219,7 @@ export const PROJECTS: Project[] = [
     id: 'lisavi',
     num: '03',
     name: 'Лисави',
-    url: 'https://lisavi.art/',
+    url: 'https://lisavi.ru/',
     description: {
       ru: 'E-commerce с нуля. ЮКасса, Т-Банк, доставка, промокоды, сертификаты, кастомная админка.',
       en: 'E-commerce from scratch. ЮKassa, T-Bank, shipping, promo codes, gift certificates, custom admin.',
@@ -174,7 +254,7 @@ export const PROJECTS: Project[] = [
     id: 'leepy',
     num: '05',
     name: 'Leepy',
-    url: 'https://leepy.art/',
+    url: 'https://leepy.ru/',
     wide: true,
     description: {
       ru: 'Лендинг для дизайнера с CMS на Strapi и анимациями на Framer Motion.',
@@ -223,6 +303,8 @@ export const STACK: StackCategory[] = [
     items: [
       { name: 'Docker', icon: 'box', description: { ru: 'Контейнеризация', en: 'Containerization' } },
       { name: 'Nginx', icon: 'split', description: { ru: 'Reverse proxy', en: 'Reverse proxy' } },
+      { name: 'Caddy', icon: 'caddy', description: { ru: 'Авто-HTTPS из коробки', en: 'Automatic HTTPS' } },
+      { name: 'Traefik', icon: 'traefik', description: { ru: 'Прокси для контейнеров', en: 'Container-native proxy' } },
       { name: 'GitHub Actions', icon: 'workflow', description: { ru: 'CI/CD пайплайны', en: 'CI/CD pipelines' } },
       { name: 'VPS / Linux', icon: 'terminal', description: { ru: 'Boot, ssh, systemd', en: 'Boot, ssh, systemd' } },
     ],
