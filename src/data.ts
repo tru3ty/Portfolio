@@ -163,10 +163,10 @@ export const TIMELINE_YEARS: TimelineYear[] = [
   },
   {
     year: 2025,
-    subtitle: { ru: 'production everywhere, mods for fun', en: 'production everywhere, mods for fun' },
+    subtitle: { ru: 'production everywhere', en: 'production everywhere' },
     summary: {
-      ru: 'Лендинг Leepy и e-commerce Lisavi с нуля, инфраструктура и DevOps, ИСТОК для МФТИ, видеосвязь Пифагорума, MVP стартапа Exploo. Починил заброшенный CS2-мод — 100k+ скачиваний.',
-      en: 'The Leepy landing and Lisavi e-commerce from scratch, infrastructure and DevOps, ИСТОК for MIPT, Pifagorum video, the Exploo MVP push. Fixed an abandoned CS2 mod — 100k+ downloads.',
+      ru: 'Лендинг Leepy и e-commerce Lisavi с нуля, инфраструктура и DevOps, ИСТОК для МФТИ, видеосвязь Пифагорума, MVP стартапа Exploo.',
+      en: 'The Leepy landing and Lisavi e-commerce from scratch, infrastructure and DevOps, ИСТОК for MIPT, Pifagorum video, the Exploo MVP push.',
     },
   },
   {
@@ -181,8 +181,24 @@ export const TIMELINE_YEARS: TimelineYear[] = [
 
 export const PROJECTS: Project[] = [
   {
-    id: 'pifagorum',
+    id: 'lofty',
     num: '01',
+    name: 'Lofty',
+    url: 'https://self-loyalty.ru',
+    description: {
+      ru: 'Self-hosted платформа лояльности и учёта для малого бизнеса. Кэшбэк-уровни, POS с QR, складской учёт с экспортом в Excel, аналитика, white-label. Монорепо на Turborepo.',
+      en: 'Self-hosted loyalty & inventory platform for small business. Cashback tiers, QR-based POS, warehouse with Excel export, analytics, white-label. Turborepo monorepo.',
+    },
+    stack: [
+      { label: 'Vite + React' },
+      { label: 'Hono', highlight: true },
+      { label: 'Prisma' },
+      { label: 'Turborepo', highlight: true },
+    ],
+  },
+  {
+    id: 'pifagorum',
+    num: '02',
     name: 'Пифагорум',
     url: 'https://vc.pifagorum.qque-dev.ru/',
     description: {
@@ -200,7 +216,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'istok',
-    num: '02',
+    num: '03',
     name: 'ИСТОК',
     url: 'https://istok-demo.ru/',
     description: {
@@ -217,7 +233,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'lisavi',
-    num: '03',
+    num: '04',
     name: 'Лисави',
     url: 'https://lisavi.ru/',
     description: {
@@ -234,7 +250,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'exploo',
-    num: '04',
+    num: '05',
     name: 'Exploo',
     url: 'https://exploo.ru',
     description: {
@@ -252,7 +268,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'leepy',
-    num: '05',
+    num: '06',
     name: 'Leepy',
     url: 'https://leepy.ru/',
     wide: true,

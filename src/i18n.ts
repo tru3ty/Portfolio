@@ -27,7 +27,7 @@ export const t = {
     { value: '6', label: { ru: 'Проектов в проде', en: 'Projects in production' } },
     { value: '10K+', label: { ru: 'Тестов прошло на ИСТОК', en: 'Tests run on ИСТОК' } },
     { value: '2+', label: { ru: 'Года в коммерческой разработке', en: 'Years in commercial dev' } },
-    { value: '100K+', label: { ru: 'Скачиваний CS2-мода', en: 'CS2 mod downloads' } },
+    { value: '4', label: { ru: 'Платёжки и LLM-интеграции', en: 'Payment & LLM integrations' } },
   ],
   sections: {
     timeline: { ru: 'Хронология', en: 'Timeline' },
