@@ -30,7 +30,7 @@ export const TIMELINE: TimelineEvent[] = [
     status: 'launched',
     role: { ru: 'Frontend Dev', en: 'Frontend Dev' },
     note: { ru: 'запущен', en: 'launched' },
-    url: 'https://leepy.art/',
+    url: 'https://leepy.ru/',
     stack: ['Next.js', 'Strapi', 'Framer Motion'],
   },
   {
@@ -47,7 +47,7 @@ export const TIMELINE: TimelineEvent[] = [
     status: 'production',
     role: { ru: 'Fullstack Dev', en: 'Fullstack Dev' },
     note: { ru: 'в проде', en: 'launched' },
-    url: 'https://lisavi.art/',
+    url: 'https://lisavi.ru/',
     stack: ['Next.js', 'NestJS', 'Prisma', 'ЮКасса', 'Т-Банк'],
   },
   {
@@ -219,7 +219,7 @@ export const PROJECTS: Project[] = [
     id: 'lisavi',
     num: '03',
     name: 'Лисави',
-    url: 'https://lisavi.art/',
+    url: 'https://lisavi.ru/',
     description: {
       ru: 'E-commerce с нуля. ЮКасса, Т-Банк, доставка, промокоды, сертификаты, кастомная админка.',
       en: 'E-commerce from scratch. ЮKassa, T-Bank, shipping, promo codes, gift certificates, custom admin.',
@@ -254,7 +254,7 @@ export const PROJECTS: Project[] = [
     id: 'leepy',
     num: '05',
     name: 'Leepy',
-    url: 'https://leepy.art/',
+    url: 'https://leepy.ru/',
     wide: true,
     description: {
       ru: 'Лендинг для дизайнера с CMS на Strapi и анимациями на Framer Motion.',
