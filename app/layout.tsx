@@ -69,13 +69,24 @@ const fontVars = [
 ].join(' ');
 
 export const metadata: Metadata = {
-  title: 'Portfolio — Fullstack Developer',
+  // Базовый URL — чтобы og:image / иконки резолвились в абсолютные ссылки.
+  metadataBase: new URL('https://tru3ty.ru'),
+  title: 'Ruslan Rogatkin — Fullstack Developer',
   description:
     'Fullstack-разработчик: React, Next.js, NestJS, TypeScript. Проекты в продакшене, DevOps и быстрый онбординг в новый стек.',
   openGraph: {
-    title: 'Portfolio — Fullstack Developer',
-    description: 'Fullstack-разработчик: React, Next.js, NestJS, TypeScript.',
+    title: 'Ruslan Rogatkin — Fullstack Developer',
+    description: 'Fullstack-разработчик: React, Next.js, NestJS, TypeScript. Проекты в продакшене.',
     type: 'website',
+    locale: 'ru_RU',
+    url: '/',
+    siteName: 'tru3ty / portfolio',
+    // app/opengraph-image.png подхватывается Next автоматически.
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Ruslan Rogatkin — Fullstack Developer',
+    description: 'Fullstack-разработчик: React, Next.js, NestJS, TypeScript.',
   },
 };
 

@@ -37,7 +37,7 @@ export const TIMELINE: TimelineEvent[] = [
     id: 'lisavi',
     date: { ru: 'Зима 2024/25', en: 'Winter 2024/25' },
     year: 2025,
-    title: { ru: 'Lisavi.art', en: 'Lisavi.art' },
+    title: { ru: 'Lisavi.ru', en: 'Lisavi.ru' },
     description: {
       ru: 'Запустил e-commerce с нуля: ЮКасса, Т-Банк, доставка с расчётом, промокоды, кастомная админ-панель. Здесь научился держать в голове всю систему.',
       en: 'Built e-commerce from scratch: ЮKassa, T-Bank, shipping calc, promo codes, custom admin panel. Learned to hold an entire system in my head.',
