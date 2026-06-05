@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { useApp } from '../AppContext';
 import { t, tr } from '../i18n';
@@ -17,17 +18,35 @@ const STATUS_META: Record<EventStatus, { ru: string; en: string; color: string; 
 
 export default function Timeline() {
   const { lang } = useApp();
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  // Прогресс скролла по контейнеру timeline — заливаем центральную линию.
+  const { scrollYProgress } = useScroll({
+    target: trackRef,
+    offset: ['start 65%', 'end 60%'],
+  });
+  const lineScale = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.4 });
 
   return (
     <section className="px-6 md:px-12 py-20 md:py-28 max-w-[1400px] mx-auto">
       <SectionHeader id="02" label={tr(t.sections.timeline, lang)} />
 
-      <div className="relative">
-        {/* Центральная вертикальная линия. На мобиле прижата влево. */}
+      <div ref={trackRef} className="relative">
+        {/* Статичная серая направляющая */}
         <div
           aria-hidden
           className="absolute top-0 bottom-0 left-6 md:left-1/2 w-px pointer-events-none"
           style={{ background: 'var(--border)', transform: 'translateX(-50%)' }}
+        />
+        {/* Акцентная линия прогресса — заливается по мере скролла */}
+        <motion.div
+          aria-hidden
+          className="absolute top-0 bottom-0 left-6 md:left-1/2 w-[2px] pointer-events-none origin-top"
+          style={{
+            background: 'var(--accent)',
+            transform: 'translateX(-50%)',
+            scaleY: lineScale,
+          }}
         />
 
         <div className="flex flex-col gap-16 md:gap-10">
@@ -52,34 +71,42 @@ function YearMarker({ year }: { year: TimelineYear }) {
   const { lang } = useApp();
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial="hidden"
+      whileInView="show"
       viewport={{ once: true, margin: '-15%' }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08 } } }}
       className="relative flex flex-col items-center text-center pt-4 md:pt-8"
     >
-      {/* Кружок на линии над цифрой года */}
-      <span
+      {/* Кружок на линии — появляется с pop */}
+      <motion.span
         aria-hidden
         className="absolute -top-2 left-6 md:left-1/2 w-3 h-3 rounded-full"
-        style={{
-          transform: 'translateX(-50%)',
-          border: '2px solid var(--accent)',
-          background: 'var(--bg)',
-        }}
+        style={{ transform: 'translateX(-50%)', border: '2px solid var(--accent)', background: 'var(--bg)' }}
+        variants={{ hidden: { scale: 0, opacity: 0 }, show: { scale: 1, opacity: 1 } }}
+        transition={{ type: 'spring', stiffness: 400, damping: 18 }}
       />
-      <div
+      <motion.div
         className="font-display font-extrabold leading-none tracking-[-0.04em] tabular-nums ml-12 md:ml-0"
         style={{ fontSize: 'clamp(56px, 9vw, 120px)' }}
+        variants={{ hidden: { opacity: 0, y: 30, scale: 0.92 }, show: { opacity: 1, y: 0, scale: 1 } }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
         {year.year}
-      </div>
-      <div className="font-mono italic text-[12px] md:text-[13px] tracking-[0.04em] text-text-secondary mt-3 ml-12 md:ml-0">
+      </motion.div>
+      <motion.div
+        className="font-mono italic text-[12px] md:text-[13px] tracking-[0.04em] text-text-secondary mt-3 ml-12 md:ml-0"
+        variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
+        transition={{ duration: 0.5 }}
+      >
         {tr(year.subtitle, lang)}
-      </div>
-      <p className="font-mono text-[12px] md:text-[13px] leading-[1.7] text-text-secondary mt-4 max-w-md ml-12 md:ml-0">
+      </motion.div>
+      <motion.p
+        className="font-mono text-[12px] md:text-[13px] leading-[1.7] text-text-secondary mt-4 max-w-md ml-12 md:ml-0"
+        variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
+        transition={{ duration: 0.5 }}
+      >
         {tr(year.summary, lang)}
-      </p>
+      </motion.p>
     </motion.div>
   );
 }
@@ -88,36 +115,25 @@ function EventRow({ event, side }: { event: TimelineEvent; side: 'left' | 'right
   const isRight = side === 'right';
   return (
     <div className="relative flex md:items-center">
-      {/* Узел события на центральной линии */}
-      <span
-        aria-hidden
-        className="absolute top-7 md:top-1/2 left-6 md:left-1/2 w-2.5 h-2.5 rounded-full z-10"
-        style={{
-          transform: 'translate(-50%, -50%)',
-          background: 'var(--accent)',
-          boxShadow: '0 0 0 4px var(--accent-soft)',
-        }}
-      />
+      <EventNode />
 
       {isRight ? (
         <>
           <div className="hidden md:block md:w-1/2" />
-          <div className="hidden md:block w-8 h-px shrink-0" style={{ background: 'var(--border)' }} />
+          <Connector side="right" />
           <div className="w-full pl-14 md:pl-0 md:w-1/2 flex md:justify-start">
-            <EventCard event={event} />
+            <EventCard event={event} from="right" />
           </div>
         </>
       ) : (
         <>
-          {/* desktop: карточка слева */}
           <div className="hidden md:flex md:w-1/2 justify-end">
-            <EventCard event={event} />
+            <EventCard event={event} from="left" />
           </div>
-          <div className="hidden md:block w-8 h-px shrink-0" style={{ background: 'var(--border)' }} />
+          <Connector side="left" />
           <div className="hidden md:block md:w-1/2" />
-          {/* mobile: всё справа от линии */}
           <div className="w-full pl-14 md:hidden">
-            <EventCard event={event} />
+            <EventCard event={event} from="right" />
           </div>
         </>
       )}
@@ -125,15 +141,61 @@ function EventRow({ event, side }: { event: TimelineEvent; side: 'left' | 'right
   );
 }
 
-function EventCard({ event }: { event: TimelineEvent }) {
-  const { lang } = useApp();
+/** Узел события на линии: pop при появлении + постоянная пульсация ореола. */
+function EventNode() {
+  return (
+    <motion.span
+      aria-hidden
+      className="absolute top-7 md:top-1/2 left-6 md:left-1/2 z-10"
+      style={{ transform: 'translate(-50%, -50%)' }}
+      initial={{ scale: 0 }}
+      whileInView={{ scale: 1 }}
+      viewport={{ once: true, margin: '-10%' }}
+      transition={{ type: 'spring', stiffness: 380, damping: 16 }}
+    >
+      <span className="relative block w-2.5 h-2.5">
+        {/* пульсирующий ореол */}
+        <motion.span
+          className="absolute inset-0 rounded-full"
+          style={{ background: 'var(--accent)' }}
+          animate={{ scale: [1, 2.4, 1], opacity: [0.5, 0, 0.5] }}
+          transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <span
+          className="absolute inset-0 rounded-full"
+          style={{ background: 'var(--accent)', boxShadow: '0 0 0 4px var(--accent-soft)' }}
+        />
+      </span>
+    </motion.span>
+  );
+}
+
+/** Горизонтальный коннектор от линии к карточке — рисуется scaleX 0→1. */
+function Connector({ side }: { side: 'left' | 'right' }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      aria-hidden
+      className="hidden md:block w-8 h-px shrink-0"
+      style={{ background: 'var(--border)', transformOrigin: side === 'right' ? 'left' : 'right' }}
+      initial={{ scaleX: 0 }}
+      whileInView={{ scaleX: 1 }}
+      viewport={{ once: true, margin: '-10%' }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+    />
+  );
+}
+
+function EventCard({ event, from }: { event: TimelineEvent; from: 'left' | 'right' }) {
+  const { lang } = useApp();
+  // Карточка въезжает со своей стороны — усиливает зигзаг.
+  const dx = from === 'left' ? -48 : 48;
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: dx, y: 14 }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{ once: true, margin: '-12%' }}
-      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -3 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -4, transition: { duration: 0.2 } }}
       data-cursor="hover"
       className="group relative bg-surface border border-border rounded-2xl p-6 md:p-7 overflow-hidden w-full max-w-[460px]"
     >
@@ -143,24 +205,30 @@ function EventCard({ event }: { event: TimelineEvent }) {
         className="absolute top-0 left-0 right-0 h-px origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"
         style={{ background: 'var(--accent)' }}
       />
+      {/* мягкий радиальный свет при hover */}
+      <div
+        aria-hidden
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at 100% 0%, var(--accent-soft) 0%, transparent 60%)' }}
+      />
 
-      <div className="flex items-start justify-between gap-3 mb-3">
+      <div className="relative flex items-start justify-between gap-3 mb-3">
         <h3 className="font-mono font-medium text-[15px] tracking-[-0.01em]">
           {tr(event.title, lang)}
         </h3>
         <StatusBadge event={event} />
       </div>
 
-      <p className="font-mono text-[12px] leading-[1.7] text-text-secondary mb-5">
+      <p className="relative font-mono text-[12px] leading-[1.7] text-text-secondary mb-5">
         {tr(event.description, lang)}
       </p>
 
       {event.stack && event.stack.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 mb-5">
+        <div className="relative flex flex-wrap gap-1.5 mb-5">
           {event.stack.map((s) => (
             <span
               key={s}
-              className="font-mono text-[10px] tracking-[0.02em] px-2.5 py-1 rounded-md border border-border text-text-secondary"
+              className="font-mono text-[10px] tracking-[0.02em] px-2.5 py-1 rounded-md border border-border text-text-secondary transition-colors group-hover:border-[var(--border-strong)]"
             >
               {s}
             </span>
@@ -168,7 +236,7 @@ function EventCard({ event }: { event: TimelineEvent }) {
         </div>
       )}
 
-      <div className="flex items-end justify-between gap-3 pt-1">
+      <div className="relative flex items-end justify-between gap-3 pt-1">
         {event.role && (
           <span className="font-mono text-[11px] text-text-secondary">{tr(event.role, lang)}</span>
         )}
@@ -187,15 +255,18 @@ function StatusBadge({ event }: { event: TimelineEvent }) {
   if (!event.status) return null;
   const meta = STATUS_META[event.status];
   const label = lang === 'ru' ? meta.ru : meta.en;
+  const live = event.status === 'production' || event.status === 'in-progress';
 
   const inner = (
     <span className="flex items-center gap-1.5 font-mono text-[11px] tracking-[0.02em] text-text-secondary whitespace-nowrap">
-      <span
+      <motion.span
         className="w-2 h-2 rounded-full shrink-0"
         style={{
           background: meta.filled ? meta.color : 'transparent',
           border: meta.filled ? 'none' : `1.5px solid ${meta.color}`,
         }}
+        animate={live ? { opacity: [1, 0.4, 1] } : undefined}
+        transition={live ? { duration: 1.8, repeat: Infinity, ease: 'easeInOut' } : undefined}
       />
       {label}
       {event.url && <ArrowUpRight size={12} className="opacity-60" />}

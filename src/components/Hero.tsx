@@ -72,7 +72,8 @@ export default function Hero() {
               <div className={ln.accent ? 'flex items-center' : undefined}>
                 <GlitchText
                   text={ln.text}
-                  className={ln.accent ? 'flex italic font-serif' : 'flex'}
+                  ambient
+                  className={ln.accent ? 'italic font-serif' : undefined}
                 />
                 {ln.accent && (
                   <motion.span
