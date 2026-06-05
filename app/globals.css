@@ -104,18 +104,23 @@
 }
 html {
   scroll-behavior: smooth;
+  /* clip жёстче hidden и не создаёт скролл-контейнер — давит «фантомный»
+     горизонтальный скролл на мобилках, который body{overflow-x:hidden} пропускает
+     (декоративные absolute-свечения, сдвиги букв ambient-анимацией и т.п.). */
+  overflow-x: clip;
 }
 html,
 body,
 #root {
   min-height: 100%;
+  max-width: 100%;
   background: var(--bg);
   color: var(--text);
 }
 body {
   font-family: var(--font-body, var(--font-display));
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
   cursor: none;
 }
 @media (max-width: 768px), (pointer: coarse) {
