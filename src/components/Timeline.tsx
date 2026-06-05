@@ -77,31 +77,39 @@ function YearMarker({ year }: { year: TimelineYear }) {
       variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08 } } }}
       className="relative flex flex-col items-center text-center pt-4 md:pt-8"
     >
-      {/* Кружок на линии — появляется с pop */}
-      <motion.span
+      {/* Кружок на линии — появляется с pop. Позиционер снаружи, scale внутри. */}
+      <div
         aria-hidden
-        className="absolute -top-2 left-6 md:left-1/2 w-3 h-3 rounded-full"
-        style={{ transform: 'translateX(-50%)', border: '2px solid var(--accent)', background: 'var(--bg)' }}
-        variants={{ hidden: { scale: 0, opacity: 0 }, show: { scale: 1, opacity: 1 } }}
-        transition={{ type: 'spring', stiffness: 400, damping: 18 }}
-      />
+        className="absolute -top-2 left-6 md:left-1/2 w-3 h-3 -translate-x-1/2"
+      >
+        <motion.span
+          className="block w-full h-full rounded-full"
+          style={{ border: '2px solid var(--accent)', background: 'var(--bg)' }}
+          variants={{ hidden: { scale: 0, opacity: 0 }, show: { scale: 1, opacity: 1 } }}
+          transition={{ type: 'spring', stiffness: 400, damping: 18 }}
+        />
+      </div>
+      {/* Плашка цвета фона под цифрой — перекрывает центральную линию,
+          чтобы оранжевая линия прогресса не резала год. */}
       <motion.div
-        className="font-display font-extrabold leading-none tracking-[-0.04em] tabular-nums ml-12 md:ml-0"
-        style={{ fontSize: 'clamp(56px, 9vw, 120px)' }}
+        className="relative font-display font-extrabold leading-none tracking-[-0.04em] tabular-nums ml-12 md:ml-0 md:px-6"
+        style={{ fontSize: 'clamp(56px, 9vw, 120px)', background: 'var(--bg)' }}
         variants={{ hidden: { opacity: 0, y: 30, scale: 0.92 }, show: { opacity: 1, y: 0, scale: 1 } }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
         {year.year}
       </motion.div>
       <motion.div
-        className="font-mono italic text-[12px] md:text-[13px] tracking-[0.04em] text-text-secondary mt-3 ml-12 md:ml-0"
+        className="relative font-mono italic text-[12px] md:text-[13px] tracking-[0.04em] text-text-secondary mt-3 ml-12 md:ml-0 md:px-3"
+        style={{ background: 'var(--bg)' }}
         variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
         transition={{ duration: 0.5 }}
       >
         {tr(year.subtitle, lang)}
       </motion.div>
       <motion.p
-        className="font-mono text-[12px] md:text-[13px] leading-[1.7] text-text-secondary mt-4 max-w-md ml-12 md:ml-0"
+        className="relative font-mono text-[12px] md:text-[13px] leading-[1.7] text-text-secondary mt-4 max-w-md ml-12 md:ml-0 md:px-4"
+        style={{ background: 'var(--bg)' }}
         variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
         transition={{ duration: 0.5 }}
       >
@@ -141,19 +149,23 @@ function EventRow({ event, side }: { event: TimelineEvent; side: 'left' | 'right
   );
 }
 
-/** Узел события на линии: pop при появлении + постоянная пульсация ореола. */
+/** Узел события на линии: pop при появлении + постоянная пульсация ореола.
+ *  Позиционирование (-50%/-50% к линии) держит ВНЕШНИЙ div статикой, а
+ *  framer-motion анимирует scale на ВНУТРЕННЕМ — иначе motion-transform
+ *  затирает translate и точка съезжает с линии. */
 function EventNode() {
   return (
-    <motion.span
+    <div
       aria-hidden
-      className="absolute top-7 md:top-1/2 left-6 md:left-1/2 z-10"
-      style={{ transform: 'translate(-50%, -50%)' }}
-      initial={{ scale: 0 }}
-      whileInView={{ scale: 1 }}
-      viewport={{ once: true, margin: '-10%' }}
-      transition={{ type: 'spring', stiffness: 380, damping: 16 }}
+      className="absolute top-6 md:top-1/2 left-6 md:left-1/2 z-10 w-2.5 h-2.5 -translate-x-1/2 -translate-y-1/2"
     >
-      <span className="relative block w-2.5 h-2.5">
+      <motion.span
+        className="relative block w-full h-full"
+        initial={{ scale: 0 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true, margin: '-10%' }}
+        transition={{ type: 'spring', stiffness: 380, damping: 16 }}
+      >
         {/* пульсирующий ореол */}
         <motion.span
           className="absolute inset-0 rounded-full"
@@ -165,8 +177,8 @@ function EventNode() {
           className="absolute inset-0 rounded-full"
           style={{ background: 'var(--accent)', boxShadow: '0 0 0 4px var(--accent-soft)' }}
         />
-      </span>
-    </motion.span>
+      </motion.span>
+    </div>
   );
 }
 

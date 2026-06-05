@@ -18,8 +18,8 @@ export const TIMELINE: TimelineEvent[] = [
   },
   {
     id: 'leepy',
-    date: { ru: 'Лето 2024', en: 'Summer 2024' },
-    year: 2024,
+    date: { ru: 'Зима 2024/25', en: 'Winter 2024/25' },
+    year: 2025,
     title: { ru: 'Leepy', en: 'Leepy' },
     description: {
       ru: 'Сайт для дизайнера на Next.js + Strapi. Первое серьёзное знакомство с Framer Motion и CMS-архитектурой.',
@@ -35,8 +35,8 @@ export const TIMELINE: TimelineEvent[] = [
   },
   {
     id: 'lisavi',
-    date: { ru: 'Осень 2024', en: 'Autumn 2024' },
-    year: 2024,
+    date: { ru: 'Зима 2024/25', en: 'Winter 2024/25' },
+    year: 2025,
     title: { ru: 'Lisavi.art', en: 'Lisavi.art' },
     description: {
       ru: 'Запустил e-commerce с нуля: ЮКасса, Т-Банк, доставка с расчётом, промокоды, кастомная админ-панель. Здесь научился держать в голове всю систему.',
@@ -117,6 +117,23 @@ export const TIMELINE: TimelineEvent[] = [
     stack: ['React', 'Hono', 'tRPC', 'tldraw', 'LiveKit', 'Better Auth'],
   },
   {
+    id: 'lofty',
+    date: { ru: 'Начало 2026', en: 'Early 2026' },
+    year: 2026,
+    title: { ru: 'Lofty', en: 'Lofty' },
+    description: {
+      ru: 'Self-hosted платформа лояльности и учёта для малого бизнеса (кафе, салоны, барбершопы). Уровни с кэшбэком, QR-транзакции, склад, аналитика, white-label — данные на своём сервере, без подписок. Монорепо на Turborepo, бэкенд Hono, фронт Vite + React.',
+      en: 'Self-hosted loyalty & inventory platform for small business (cafés, salons, barbershops). Cashback tiers, QR transactions, warehouse, analytics, white-label — data on your own server, no subscriptions. Turborepo monorepo, Hono backend, Vite + React frontend.',
+    },
+    tag: { ru: 'Проект', en: 'Project' },
+    kind: 'project',
+    status: 'production',
+    role: { ru: 'Fullstack Dev', en: 'Fullstack Dev' },
+    note: { ru: 'в проде', en: 'in production' },
+    url: 'https://self-loyalty.ru',
+    stack: ['Vite + React', 'Hono', 'Prisma', 'Turborepo'],
+  },
+  {
     id: 'now',
     date: { ru: '2026', en: '2026' },
     year: 2026,
@@ -140,24 +157,24 @@ export const TIMELINE_YEARS: TimelineYear[] = [
     year: 2024,
     subtitle: { ru: 'первый прод, первые шишки', en: 'first prod, first lessons' },
     summary: {
-      ru: 'Первая строка в проде, лендинг Leepy и e-commerce Lisavi с нуля. Понял, что фуллстек — это про удержание всей системы в голове.',
-      en: 'First line in production, the Leepy landing and the Lisavi e-commerce from scratch. Learned that fullstack is about holding the whole system in your head.',
+      ru: 'Первая строка кода в проде. Next.js и NestJS из пет-проектов переросли в реальные задачи — и я пошёл в фуллстек.',
+      en: 'First line of code in production. Next.js and NestJS grew from pet projects into real work — and I went fullstack.',
     },
   },
   {
     year: 2025,
     subtitle: { ru: 'production everywhere, mods for fun', en: 'production everywhere, mods for fun' },
     summary: {
-      ru: 'Lisavi в проде, инфраструктура и DevOps, ИСТОК для МФТИ, видеосвязь Пифагорума, MVP стартапа Exploo. Починил заброшенный CS2-мод — 100k+ скачиваний.',
-      en: 'Lisavi in production, infrastructure and DevOps, ИСТОК for MIPT, Pifagorum video, Exploo MVP push. Fixed an abandoned CS2 mod — 100k+ downloads.',
+      ru: 'Лендинг Leepy и e-commerce Lisavi с нуля, инфраструктура и DevOps, ИСТОК для МФТИ, видеосвязь Пифагорума, MVP стартапа Exploo. Починил заброшенный CS2-мод — 100k+ скачиваний.',
+      en: 'The Leepy landing and Lisavi e-commerce from scratch, infrastructure and DevOps, ИСТОК for MIPT, Pifagorum video, the Exploo MVP push. Fixed an abandoned CS2 mod — 100k+ downloads.',
     },
   },
   {
     year: 2026,
-    subtitle: { ru: 'open to work', en: 'open to work' },
+    subtitle: { ru: 'shipping & open to work', en: 'shipping & open to work' },
     summary: {
-      ru: 'Ищу команду, где можно расти как фуллстек и брать ответственность за архитектуру.',
-      en: 'Looking for a team where I can grow as fullstack and own the architecture.',
+      ru: 'Запустил Lofty — self-hosted лояльность и учёт для малого бизнеса. Ищу команду, где можно расти как фуллстек и брать ответственность за архитектуру.',
+      en: 'Shipped Lofty — self-hosted loyalty and inventory for small business. Looking for a team where I can grow as fullstack and own the architecture.',
     },
   },
 ];

@@ -1,10 +1,24 @@
 import type { Metadata, Viewport } from 'next';
-import { Syne, DM_Mono, Space_Grotesk, JetBrains_Mono, Instrument_Serif } from 'next/font/google';
+import {
+  Syne,
+  DM_Mono,
+  Space_Grotesk,
+  JetBrains_Mono,
+  Instrument_Serif,
+  Manrope,
+} from 'next/font/google';
 import './globals.css';
 
 // Шрифты через next/font — self-hosted, без запроса к Google на рантайме,
 // без CLS. Каждый экспортит CSS-переменную, на которую ссылаются токены
 // --font-* в globals.css (data-fontpair переключает их).
+//
+// ВАЖНО про кириллицу: Syne / DM Mono / Space Grotesk / Instrument Serif НЕ
+// содержат кириллицу. Чтобы русский текст не падал на системный fallback
+// (отсюда был «сломанный» вид RU и разнобой с латинскими вставками), для
+// кириллицы подключаем Manrope (display/body) и JetBrains Mono (mono) с
+// subset 'cyrillic' и ставим их СЛЕДУЮЩИМИ в font-family — браузер берёт их
+// для тех глифов, которых нет в основном латинском шрифте.
 const syne = Syne({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700', '800'],
@@ -25,7 +39,7 @@ const spaceGrotesk = Space_Grotesk({
   display: 'swap',
 });
 const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
+  subsets: ['latin', 'cyrillic'],
   weight: ['300', '400', '500'],
   variable: '--font-jetbrains-mono',
   display: 'swap',
@@ -37,6 +51,13 @@ const instrumentSerif = Instrument_Serif({
   variable: '--font-instrument-serif',
   display: 'swap',
 });
+// Кириллический «двойник» для display/body — близок по характеру к Syne/Grotesk.
+const manrope = Manrope({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-manrope',
+  display: 'swap',
+});
 
 const fontVars = [
   syne.variable,
@@ -44,6 +65,7 @@ const fontVars = [
   spaceGrotesk.variable,
   jetbrainsMono.variable,
   instrumentSerif.variable,
+  manrope.variable,
 ].join(' ');
 
 export const metadata: Metadata = {

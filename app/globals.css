@@ -1,10 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-syne), sans-serif;
-  --font-mono: var(--font-dm-mono), monospace;
-  --font-display: var(--font-syne), sans-serif;
-  --font-serif: var(--font-instrument-serif), serif;
+  /* Кириллический двойник идёт сразу после латинского шрифта: браузер
+     подставляет его для глифов, которых нет в основном (per-glyph fallback). */
+  --font-sans: var(--font-syne), var(--font-manrope), sans-serif;
+  --font-mono: var(--font-dm-mono), var(--font-jetbrains-mono), monospace;
+  --font-display: var(--font-syne), var(--font-manrope), sans-serif;
+  --font-serif: var(--font-instrument-serif), var(--font-manrope), serif;
 }
 
 /* THEME TOKENS — driven by data-theme + data-accent on <html> */
@@ -59,20 +61,22 @@
   --accent-soft: rgba(236, 72, 153, 0.14);
 }
 
-/* Font pair tokens — families come from next/font CSS variables (see layout.tsx) */
+/* Font pair tokens — families come from next/font CSS variables (see layout.tsx).
+   Manrope/JetBrains Mono стоят следом за латинским шрифтом как кириллический
+   двойник — RU-глифы берутся из них, латиница из основного. */
 [data-fontpair="syne"] {
-  --font-display: var(--font-syne), sans-serif;
-  --font-body: var(--font-syne), sans-serif;
-  --font-mono: var(--font-dm-mono), monospace;
+  --font-display: var(--font-syne), var(--font-manrope), sans-serif;
+  --font-body: var(--font-syne), var(--font-manrope), sans-serif;
+  --font-mono: var(--font-dm-mono), var(--font-jetbrains-mono), monospace;
 }
 [data-fontpair="grotesk"] {
-  --font-display: var(--font-space-grotesk), sans-serif;
-  --font-body: var(--font-space-grotesk), sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-manrope), sans-serif;
+  --font-body: var(--font-space-grotesk), var(--font-manrope), sans-serif;
   --font-mono: var(--font-jetbrains-mono), monospace;
 }
 [data-fontpair="serif"] {
-  --font-display: var(--font-instrument-serif), serif;
-  --font-body: var(--font-space-grotesk), sans-serif;
+  --font-display: var(--font-instrument-serif), var(--font-manrope), serif;
+  --font-body: var(--font-space-grotesk), var(--font-manrope), sans-serif;
   --font-mono: var(--font-jetbrains-mono), monospace;
 }
 
