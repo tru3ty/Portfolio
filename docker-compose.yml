@@ -5,10 +5,15 @@ services:
       dockerfile: Dockerfile
     image: tru3ty-portfolio
     restart: unless-stopped
-    ports:
-      # Слева — хост-порт (поменяй при конфликте), справа — порт nginx в контейнере.
-      # В Dokploy маппинг можно убрать и завести через его reverse-proxy (Traefik).
-      - "3000:80"
+    # В Dokploy НЕ публикуем host-порт: его reverse-proxy (Traefik) ходит к
+    # контейнеру по внутренней сети на :80. Публикация порта приводит к
+    # конфликтам вида "Bind for 0.0.0.0:3000 failed: port is already allocated".
+    expose:
+      - "80"
+    # Для локального запуска без Dokploy раскомментируй маппинг (поменяй
+    # левый порт, если 3000 занят):
+    # ports:
+    #   - "8080:80"
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost/"]
       interval: 30s
