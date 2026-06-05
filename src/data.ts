@@ -271,7 +271,6 @@ export const PROJECTS: Project[] = [
     num: '06',
     name: 'Leepy',
     url: 'https://leepy.ru/',
-    wide: true,
     description: {
       ru: 'Лендинг для дизайнера с CMS на Strapi и анимациями на Framer Motion.',
       en: 'Designer landing with Strapi CMS and Framer Motion animations.',
