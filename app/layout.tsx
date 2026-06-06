@@ -93,6 +93,9 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
+  // cover нужен, чтобы заработали env(safe-area-inset-*) — иначе на iOS
+  // фикс-шапка наезжает под вырез/браузерный бар во встроенных webview.
+  viewportFit: 'cover',
 };
 
 // Применяет сохранённые тему/язык ДО первой отрисовки, чтобы не было вспышки

@@ -13,7 +13,15 @@ export default function TopBar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className="fixed top-0 inset-x-0 z-50 backdrop-blur-md"
-      style={{ background: 'color-mix(in oklab, var(--bg) 80%, transparent)' }}
+      style={{
+        background: 'color-mix(in oklab, var(--bg) 80%, transparent)',
+        // фон/blur тянется до самого верха, а контент сдвигаем ниже
+        // системной зоны (вырез/браузерный бар во встроенных webview).
+        // px-боковые от выреза — чтобы на ландшафте контент не уезжал под него.
+        paddingTop: 'env(safe-area-inset-top)',
+        paddingLeft: 'env(safe-area-inset-left)',
+        paddingRight: 'env(safe-area-inset-right)',
+      }}
     >
       <div className="flex items-center justify-between max-w-[1400px] mx-auto px-6 md:px-12 py-4 border-b border-border">
         <Magnetic className="font-mono text-[11px] tracking-[0.18em] uppercase text-text-secondary flex items-center gap-2">
