@@ -57,7 +57,7 @@ export default function Hero() {
         </motion.div>
 
         <h1
-          className="flex flex-col font-display font-extrabold leading-[0.85] tracking-[-0.04em] select-none"
+          className="flex flex-col font-display font-extrabold leading-[0.95] tracking-[-0.04em] select-none"
           style={{ fontSize: 'clamp(56px, 14vw, 220px)' }}
         >
           {lines.map((ln, i) => (

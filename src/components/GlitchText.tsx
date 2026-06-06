@@ -103,7 +103,7 @@ const Char = memo(function Char({
   const anim = active
     ? { y: [0, -3, 1, 0], rotate: [0, -1, 1, 0] }
     : ambient
-      ? { y: [0, -6, 0, 4, 0], rotate: [0, -1.2, 0, 1.2, 0] }
+      ? { y: [0, -3, 0, 2, 0], rotate: [0, -1, 0, 1, 0] }
       : { y: 0, rotate: 0 };
 
   const transition = active
