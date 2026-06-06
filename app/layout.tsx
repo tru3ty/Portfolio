@@ -1,37 +1,14 @@
 import type { Metadata, Viewport } from 'next';
-import {
-  Syne,
-  DM_Mono,
-  Space_Grotesk,
-  JetBrains_Mono,
-  Instrument_Serif,
-  Manrope,
-} from 'next/font/google';
+import { Space_Grotesk, JetBrains_Mono, Instrument_Serif, Manrope } from 'next/font/google';
 import './globals.css';
 
-// Шрифты через next/font — self-hosted, без запроса к Google на рантайме,
-// без CLS. Каждый экспортит CSS-переменную, на которую ссылаются токены
-// --font-* в globals.css (data-fontpair переключает их).
+// Шрифты через next/font — self-hosted, без запроса к Google на рантайме, без CLS.
+// Каждый экспортит CSS-переменную, на которую ссылаются токены --font-* в globals.css.
 //
-// ВАЖНО про кириллицу: Syne / DM Mono / Space Grotesk / Instrument Serif НЕ
-// содержат кириллицу. Чтобы русский текст не падал на системный fallback
-// (отсюда был «сломанный» вид RU и разнобой с латинскими вставками), для
-// кириллицы подключаем Manrope (display/body) и JetBrains Mono (mono) с
-// subset 'cyrillic' и ставим их СЛЕДУЮЩИМИ в font-family — браузер берёт их
-// для тех глифов, которых нет в основном латинском шрифте.
-const syne = Syne({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-syne',
-  display: 'swap',
-});
-const dmMono = DM_Mono({
-  subsets: ['latin'],
-  weight: ['300', '400', '500'],
-  style: ['normal', 'italic'],
-  variable: '--font-dm-mono',
-  display: 'swap',
-});
+// ВАЖНО про кириллицу: Space Grotesk и Instrument Serif НЕ содержат кириллицу.
+// Чтобы русский текст не падал на системный fallback, для кириллицы подключаем
+// Manrope (display/body) и JetBrains Mono (mono) с subset 'cyrillic' и ставим их
+// СЛЕДУЮЩИМИ в font-family — браузер берёт их для глифов, которых нет в латинском.
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
@@ -51,7 +28,7 @@ const instrumentSerif = Instrument_Serif({
   variable: '--font-instrument-serif',
   display: 'swap',
 });
-// Кириллический «двойник» для display/body — близок по характеру к Syne/Grotesk.
+// Кириллический «двойник» для display/body — близок по характеру к Grotesk.
 const manrope = Manrope({
   subsets: ['latin', 'cyrillic'],
   weight: ['400', '500', '600', '700', '800'],
@@ -60,8 +37,6 @@ const manrope = Manrope({
 });
 
 const fontVars = [
-  syne.variable,
-  dmMono.variable,
   spaceGrotesk.variable,
   jetbrainsMono.variable,
   instrumentSerif.variable,

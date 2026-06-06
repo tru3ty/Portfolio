@@ -1,7 +1,7 @@
 export type Lang = 'ru' | 'en';
 export type Theme = 'light' | 'dark';
 export type Accent = 'orange' | 'blue' | 'violet' | 'green' | 'pink';
-export type FontPair = 'syne' | 'grotesk' | 'serif';
+export type FontPair = 'grotesk';
 
 /** Локализованная строка ru/en. */
 export type L10n = { ru: string; en: string };
