@@ -6,6 +6,7 @@ import { ArrowDown } from 'lucide-react';
 import { useApp } from '../AppContext';
 import { t, tr } from '../i18n';
 import GlitchText from './GlitchText';
+import GridWarp from './GridWarp';
 
 export default function Hero() {
   const { lang } = useApp();
@@ -27,17 +28,8 @@ export default function Hero() {
       ref={ref}
       className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 pt-32 pb-20 overflow-hidden"
     >
-      {/* background grid */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.07]"
-        style={{
-          backgroundImage:
-            'linear-gradient(to right, var(--text) 1px, transparent 1px), linear-gradient(to bottom, var(--text) 1px, transparent 1px)',
-          backgroundSize: '80px 80px',
-          maskImage: 'radial-gradient(ellipse at center, black 30%, transparent 75%)',
-        }}
-      />
+      {/* интерактивный фон: сетка изгибается вокруг курсора */}
+      <GridWarp />
 
       <motion.div
         initial="hidden"
