@@ -23,6 +23,8 @@
   --text-muted: #9a948a;
   --invert-bg: #1a1814;
   --invert-text: #f5f3ee;
+  --grid-line: #1a1814;   /* сетка Hero — графит на светлом фоне */
+  --grid-alpha: 0.07;
 }
 
 [data-theme="dark"] {
@@ -37,28 +39,14 @@
   --text-muted: #6b6760;
   --invert-bg: #f5f3ee;
   --invert-text: #1a1814;
+  --grid-line: #e8622a;   /* сетка Hero — оранж-акцент на тёмном фоне */
+  --grid-alpha: 0.16;     /* оранж при низкой alpha тонет в тёмном → выше */
 }
 
-/* Accent palettes — variable hue family, same chroma feel */
+/* Акцент захардкожен (data-accent="orange", см. AppContext). */
 [data-accent="orange"] {
   --accent: #e8622a;
   --accent-soft: rgba(232, 98, 42, 0.12);
-}
-[data-accent="blue"] {
-  --accent: #2d5be3;
-  --accent-soft: rgba(45, 91, 227, 0.14);
-}
-[data-accent="violet"] {
-  --accent: #7c4dff;
-  --accent-soft: rgba(124, 77, 255, 0.14);
-}
-[data-accent="green"] {
-  --accent: #2ea66b;
-  --accent-soft: rgba(46, 166, 107, 0.14);
-}
-[data-accent="pink"] {
-  --accent: #ec4899;
-  --accent-soft: rgba(236, 72, 153, 0.14);
 }
 
 /* Font tokens — families come from next/font CSS variables (see layout.tsx).
@@ -112,10 +100,15 @@ body {
   font-family: var(--font-body, var(--font-display));
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
-  cursor: none;
 }
-@media (max-width: 768px), (pointer: coarse) {
-  body { cursor: auto; }
+
+/* Кастомный курсор (CursorBlob) на десктопе → системный прячем ВЕЗДЕ, иначе
+   ссылки/кнопки/Tailwind cursor-* возвращают pointer/text поверх кастомного. */
+@media (min-width: 769px) and (pointer: fine) {
+  body,
+  body * {
+    cursor: none !important;
+  }
 }
 
 /* Noise texture */

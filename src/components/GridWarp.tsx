@@ -35,8 +35,10 @@ export default function GridWarp() {
     let strength = 0; // 0..1 — затухание эффекта когда курсор вне зоны
     let rafId = 0;
 
-    const lineColor = () =>
-      getComputedStyle(document.documentElement).getPropertyValue('--text').trim() || '#1a1814';
+    const css = (name: string, fallback: string) =>
+      getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback;
+    const lineColor = () => css('--grid-line', '#1a1814');
+    const lineAlpha = () => parseFloat(css('--grid-alpha', '0.08')) || 0.08;
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
@@ -68,7 +70,7 @@ export default function GridWarp() {
       ctx.clearRect(0, 0, w, h);
       ctx.lineWidth = 1;
       ctx.strokeStyle = lineColor();
-      ctx.globalAlpha = 0.07;
+      ctx.globalAlpha = lineAlpha();
 
       // вертикальные линии
       for (let x = 0; x <= w + GRID; x += GRID) {

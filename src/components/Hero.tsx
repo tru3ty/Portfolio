@@ -36,7 +36,7 @@ export default function Hero() {
         animate="show"
         variants={{
           hidden: {},
-          show: { transition: { staggerChildren: 0.06, delayChildren: 0.2 } },
+          show: { transition: { staggerChildren: 0.14, delayChildren: 0.3 } },
         }}
         className="max-w-[1400px] w-full mx-auto"
       >
@@ -58,13 +58,15 @@ export default function Hero() {
               style={{ y: ln.y }}
               variants={{
                 hidden: { opacity: 0, y: 60, skewY: 6 },
-                show: { opacity: 1, y: 0, skewY: 0, transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] } },
+                show: { opacity: 1, y: 0, skewY: 0, transition: { duration: 1.4, ease: [0.22, 1, 0.36, 1] } },
               }}
             >
               <div className={ln.accent ? 'flex items-center' : undefined}>
                 <GlitchText
                   text={ln.text}
                   ambient
+                  loadGlitch
+                  hoverGlitch={false}
                   className={ln.accent ? 'italic font-serif' : undefined}
                 />
                 {ln.accent && (
@@ -72,7 +74,7 @@ export default function Hero() {
                     aria-hidden
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: 1 }}
-                    transition={{ duration: 0.8, delay: 0.7 }}
+                    transition={{ duration: 1.1, delay: 1.2 }}
                     className="pointer-events-none shrink-0 ml-4 origin-left rounded-full"
                     style={{
                       width: 'clamp(40px, 8vw, 140px)',
